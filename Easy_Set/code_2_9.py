@@ -6,7 +6,7 @@ class Solution(object):
         :rtype: bool
         """
         str_x = str(x)
-        i = 0;
+        i = 0
         j = len(str_x) - 1
         while(i < j):
             if(str_x[i] == str_x[j]):

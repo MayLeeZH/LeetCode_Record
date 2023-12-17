@@ -20,10 +20,54 @@
 
 class Solution:
     def romanToInt(self, s: str) -> int:
-        print(s)
+        skip_flag = False
+        sum = 0
+        length = len(s)
+        for i,ch in enumerate(s):
+            if(skip_flag == True):
+                skip_flag = False
+                continue
 
-
+            if(ch == 'M'):
+                sum += 1000
+            elif( ch == 'D' ):
+                sum += 500
+            elif( ch == 'C' ):
+                if( i + 1 < length):
+                    if(s[i+1] == 'D'):
+                        skip_flag = True
+                        sum += 400
+                    elif(s[i+1] == 'M'):
+                        sum += 900
+                        skip_flag = True
+                if(skip_flag == False):
+                    sum += 100
+            elif( ch == 'L' ):
+                sum += 50
+            elif( ch == 'X' ):
+                if( i + 1 < length):
+                    if(s[i+1] == 'L'):
+                        skip_flag = True
+                        sum += 40
+                    elif(s[i+1] == 'C'):
+                        sum += 90
+                        skip_flag = True
+                if(skip_flag == False):
+                    sum += 10
+            elif( ch == 'V' ):
+                sum += 5
+            elif( ch == 'I' ):
+                if( i + 1 < length):
+                    if(s[i+1] == 'V'):
+                        skip_flag = True
+                        sum += 4
+                    elif(s[i+1] == 'X'):
+                        sum += 9
+                        skip_flag = True
+                if(skip_flag == False):
+                    sum += 1
+        return sum
 
 sol = Solution()
-sol.romanToInt("LVIII")
-
+result = sol.romanToInt("MCMXCIV")
+print(result)
